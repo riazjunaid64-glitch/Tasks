@@ -1,6 +1,6 @@
 using BeerCollection.Application.Interfaces;
+using BeerCollection.Application.Services;
 using BeerCollection.Infrastructure.Data;
-using BeerCollection.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 

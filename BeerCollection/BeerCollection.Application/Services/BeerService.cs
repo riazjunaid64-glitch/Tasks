@@ -1,44 +1,47 @@
 using BeerCollection.Application.DTOs;
 using BeerCollection.Application.Interfaces;
 using BeerCollection.Domain.Entities;
+using BeerCollection.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeerCollection.Application.Services;
 
 public class BeerService : IBeerService
 {
-    private readonly List<Beer> _beers = new();
+    private readonly AppDbContext _context;
 
-    public Task AddBeerAsync(CreateBeerDto dto)
+    public BeerService(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task AddBeerAsync(CreateBeerDto dto)
     {
         var beer = new Beer(dto.Name, dto.Type, dto.Rating);
-        _beers.Add(beer);
-
-        return Task.CompletedTask;
+        _context.Beers.Add(beer);
+        await _context.SaveChangesAsync();
     }
 
-    public Task<List<Beer>> GetAllAsync()
+    public async Task<List<Beer>> GetAllAsync()
     {
-        return Task.FromResult(_beers);
+        return await _context.Beers.ToListAsync();
     }
 
-    public Task<List<Beer>> SearchAsync(string query)
+    public async Task<List<Beer>> SearchAsync(string query)
     {
-        var result = _beers
-            .Where(b => b.Name.Contains(query, StringComparison.OrdinalIgnoreCase))
-            .ToList();
-
-        return Task.FromResult(result);
+        return await _context.Beers
+            .Where(b => b.Name.Contains(query))
+            .ToListAsync();
     }
 
-    public Task RateBeerAsync(Guid id, int rating)
+    public async Task RateBeerAsync(Guid id, int rating)
     {
-        var beer = _beers.FirstOrDefault(b => b.Id == id);
+        var beer = await _context.Beers.FirstOrDefaultAsync(b => b.Id == id);
 
         if (beer == null)
             throw new Exception("Beer not found");
 
         beer.AddRating(rating);
-
-        return Task.CompletedTask;
+        await _context.SaveChangesAsync();
     }
 }

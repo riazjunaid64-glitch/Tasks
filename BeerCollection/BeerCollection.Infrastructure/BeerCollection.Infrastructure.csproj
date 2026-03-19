@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\BeerCollection.Application\BeerCollection.Application.csproj" />
+    <ProjectReference Include="..\BeerCollection.Domain\BeerCollection.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
