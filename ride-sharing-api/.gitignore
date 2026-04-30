@@ -1,0 +1,52 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+
+# Rider / JetBrains
+.idea/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+
+# NuGet
+*.nupkg
+packages/
+
+# Test results
+TestResults/
+
+# ASP.NET Core
+appsettings.Development.json
+
+# Generated files
+*.g.cs
+*.g.i.cs
+
+# Publish output
+publish/
+
+# Node (if frontend later)
+node_modules/
+
+# Coverage
+coverage/
+
+# Misc
+*.tmp
+*.cache
