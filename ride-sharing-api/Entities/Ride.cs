@@ -14,7 +14,7 @@ public class Ride
     public int PickupLocationId { get; set; }
     public int DropoffLocationId { get; set; }
 
-    public decimal Amount { get; set; }
+    public decimal Fare { get; set; }
 
    public RideStatus Status { get; set; } = RideStatus.Requested;
 
@@ -25,7 +25,6 @@ public class Ride
     public Location DropoffLocation { get; set; } = null!;
 
     public Payment? Payment { get; set; }
-    public int? VehicleId { get; set; }
     public int? VehicleId { get; set; }
     public Vehicle? Vehicle { get; set; }
 }
